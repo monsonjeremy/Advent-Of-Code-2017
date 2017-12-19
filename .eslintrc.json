@@ -1,0 +1,32 @@
+{
+  "extends": ["airbnb", "prettier"],
+  "plugins": ["prettier"],
+  "env": {
+    "es6": true,
+    "node": true
+  },
+  "settings": {
+    "polyfills": ["fetch"]
+  },
+  "rules": {
+    "semi": [2, "never"],
+    "no-param-reassign": 0,
+    "import/prefer-default-export": 1,
+    "no-console": 0,
+    "comma-dangle": [
+      "error",
+      {
+        "arrays": "never",
+        "objects": "always",
+        "imports": "never",
+        "exports": "never",
+        "functions": "never"
+      }
+    ]
+  },
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "sourceType": "module",
+    "allowImportExportEverywhere": true
+  }
+}
