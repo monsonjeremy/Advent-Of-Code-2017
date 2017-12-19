@@ -4,12 +4,6 @@
 
 import fs from 'fs'
 
-// Parse the input by line
-const INPUT = fs
-  .readFileSync('./day9/day9.txt')
-  .toString('utf-8')
-  .split('')
-
 // helper function for peeking the top of the stac
 Array.prototype.peek = function() {
   if (this.length > 0) {
@@ -19,6 +13,12 @@ Array.prototype.peek = function() {
   return null
 }
 
+// Parse the input by line
+const INPUT = fs
+  .readFileSync('./day9/day9.txt')
+  .toString('utf-8')
+  .split('')
+
 // Globals
 const STACK = []
 let IS_GARBAGE = false
@@ -27,27 +27,22 @@ let GARBAGE_COUNT = 0
 
 for (let currIndex = 0; currIndex < INPUT.length; currIndex += 1) {
   // If current character is an ignore character we can safely skip forward in the loop
-  if (INPUT[currIndex] === '!') {
-    currIndex += 1
-  } else if (INPUT[currIndex] === '<' && !IS_GARBAGE) {
-    // Opening garbage tag, and not already garbage, so flip the garbage state and proceed to next iteration
-    IS_GARBAGE = true
-  } else if (INPUT[currIndex] === '>' && IS_GARBAGE) {
-    // Closing garbage tag, so flip the garbage state and proceed to next iteration
-    IS_GARBAGE = false
-  } else if (!IS_GARBAGE) {
-    // Not garbage, so now we can handle the grouping characters and manipulate the stack
-    if (INPUT[currIndex] === '{') {
-      STACK.push(STACK.peek() + 1)
-    }
-    if (INPUT[currIndex] === '}' && STACK.peek()) {
-      const popValue = STACK.pop()
-      SUM_VAL += popValue
-    }
-  } else {
-    // This is garbage so let's sum it yo
+  if (INPUT[currIndex] === '!') currIndex += 1
+  else if (IS_GARBAGE)
+    // It's garbage, just inc garbage count
     GARBAGE_COUNT += 1
-  }
+  else if (INPUT[currIndex] === '<' && !IS_GARBAGE)
+    // Opening garbage tag, flip garbage state
+    IS_GARBAGE = true
+  else if (INPUT[currIndex] === '>' && IS_GARBAGE)
+    // Closing garbage tag, flip garbage state
+    IS_GARBAGE = false
+  else if (INPUT[currIndex] === '{')
+    // Push onto the stack for opening group char
+    STACK.push(STACK.peek() + 1)
+  else if (INPUT[currIndex] === '}')
+    // Pop off the stack for closing group char and add to the sum
+    SUM_VAL += STACK.pop()
 }
 
 console.log(`Part 1 solution = ${SUM_VAL}`)
