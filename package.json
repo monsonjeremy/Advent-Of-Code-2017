@@ -4,9 +4,12 @@
   "description": "Solutions to the advent of code problems for 2017",
   "dependencies": {
     "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
     "babel-eslint": "^8.0.3",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.6.1",
+    "babel-register": "^6.26.0",
+    "chai": "^4.1.2",
     "eslint": "^4.13.1",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-config-prettier": "^2.9.0",
@@ -16,17 +19,15 @@
     "eslint-plugin-prettier": "^2.4.0",
     "eslint-plugin-react": "^7.5.1",
     "fs": "0.0.1-security",
+    "mocha": "^4.0.1",
     "prettier": "^1.9.2"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "eslint-plugin-mocha": "^4.11.0"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test:advent-day": "day=$npm_config_day; echo Testing day number $day; mocha --require babel-core/register --recursive day$day/test.js"
   },
   "author": "Jeremy Monson",
-  "license": "MIT",
-  "babel": {
-    "presets": ["env"],
-    "plugins": ["transform-object-rest-spread"],
-    "ignore": ["/node_modules/"]
-  }
+  "license": "MIT"
 }
