@@ -26,7 +26,8 @@
     "eslint-plugin-mocha": "^4.11.0"
   },
   "scripts": {
-    "test:advent-day": "day=$npm_config_day; echo Testing day number $day; mocha --require babel-core/register --recursive day$day/test.js"
+    "test:advent-day":
+      "day=$npm_config_day; echo Testing day number $day; npx --stack_size=3200 mocha --require babel-core/register --recursive day$day/test.js"
   },
   "author": "Jeremy Monson",
   "license": "MIT"

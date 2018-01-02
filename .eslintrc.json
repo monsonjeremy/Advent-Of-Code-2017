@@ -9,7 +9,7 @@
     "polyfills": ["fetch"]
   },
   "rules": {
-    "semi": [2, "never"],
+    "semi": [2, "always"],
     "no-param-reassign": 0,
     "import/prefer-default-export": 1,
     "no-console": 0,
@@ -28,5 +28,9 @@
   "parserOptions": {
     "sourceType": "module",
     "allowImportExportEverywhere": true
+  },
+  "globals": {
+    "describe": true,
+    "it": true
   }
 }
